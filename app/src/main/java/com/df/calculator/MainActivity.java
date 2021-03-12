@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numberOne = 0;
     private int numberTwo = 0;
     private String operation = "";
+    private Boolean numberIsOperated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +101,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             makeOperation(Integer.parseInt(txtResult.getText().toString()), "multiply");
 
         } else if (v.getId() == R.id.btnEquals) {
-
+            makeOperation(Integer.parseInt(txtResult.getText().toString()), "");
         } else {
-
+            if (numberIsOperated){
+                txtResult.setText("");
+                numberIsOperated = false;
+            }
             Button btnSelectedButton = findViewById(v.getId());
             txtResult.setText(txtResult.getText() + btnSelectedButton.getText().toString());
         }
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (operation.equalsIgnoreCase("multiply")){
             numberOne = numberOne*numberTwo;
-        }else{
+        }else if (operation.equalsIgnoreCase("division")){
 
            //  Double result = Double.parseDouble(String.valueOf(numberOne))/ Double.parseDouble(String.valueOf(numberTwo));
             Double result = (double)numberOne/(double)numberTwo;
@@ -140,7 +144,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!operation.equalsIgnoreCase("division")){
             txtResult.setText(String.valueOf(numberOne));
         }
+        numberIsOperated = true;
         numberTwo =0;
+        if(operation == ""){
+            numberOne = 0;
+            numberTwo = 0;
+        }
     }
 
 
