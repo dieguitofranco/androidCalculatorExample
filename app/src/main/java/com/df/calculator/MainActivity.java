@@ -136,10 +136,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             numberOne = numberOne*numberTwo;
         }else if (operation.equalsIgnoreCase("division")){
 
-           //  Double result = Double.parseDouble(String.valueOf(numberOne))/ Double.parseDouble(String.valueOf(numberTwo));
+            //  Double result = Double.parseDouble(String.valueOf(numberOne))/ Double.parseDouble(String.valueOf(numberTwo));
             Double result = (double)numberOne/(double)numberTwo;
-            numberOne = Integer.parseInt(String.valueOf(result));
-            txtResult.setText(result.toString());
+            //numberOne = Integer.parseInt(String.valueOf(result));
+            int b = (int)Math.round(result);
+            numberOne = b;
+            txtResult.setText(String.valueOf(b));
         }
         if (!operation.equalsIgnoreCase("division")){
             txtResult.setText(String.valueOf(numberOne));
@@ -147,7 +149,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         numberIsOperated = true;
         numberTwo =0;
         if(operation == ""){
-            numberOne = 0;
+            numberOne = Integer.parseInt(txtResult.getText().toString());
+            txtResult.setText("");
             numberTwo = 0;
         }
     }
