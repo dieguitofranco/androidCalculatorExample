@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnEquals;
     private Button btnClear;
 
-    private int numberOne = 0;
-    private int numberTwo = 0;
+    private Double numberOne = 0.0;
+    private Double numberTwo = 0.0;
     private String operation = "";
     private Boolean numberIsOperated = false;
 
@@ -87,21 +87,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.btnClear) {
             resetValues();
         } else if (v.getId() == R.id.btnDivision) {
-
-            makeOperation(Integer.parseInt(txtResult.getText().toString()), "division");
+            if(txtResult.getText().toString().isEmpty()){
+                txtResult.setText("ERROR");
+            }else {
+                makeOperation(Double.parseDouble(txtResult.getText().toString()), "division");
+            }
 
         } else if (v.getId() == R.id.btnPlus) {
+            if(txtResult.getText().toString().isEmpty()){
+                txtResult.setText("ERROR");
+            }else {
+                makeOperation(Double.parseDouble(txtResult.getText().toString()), "plus");
+            }
 
-            makeOperation(Integer.parseInt(txtResult.getText().toString()), "plus");
 
         } else if (v.getId() == R.id.btnMinux) {
-            makeOperation(Integer.parseInt(txtResult.getText().toString()), "minus");
+            if(txtResult.getText().toString().isEmpty()){
+                txtResult.setText("ERROR");
+            }else {
+                makeOperation(Double.parseDouble(txtResult.getText().toString()), "minus");
+            }
 
         } else if (v.getId() == R.id.btnMultiply) {
-            makeOperation(Integer.parseInt(txtResult.getText().toString()), "multiply");
+            if(txtResult.getText().toString().isEmpty()){
+                txtResult.setText("ERROR");
+            }else {
+                makeOperation(Double.parseDouble(txtResult.getText().toString()), "multiply");
+            }
 
         } else if (v.getId() == R.id.btnEquals) {
-            makeOperation(Integer.parseInt(txtResult.getText().toString()), "");
+            if(txtResult.getText().toString().isEmpty()){
+                txtResult.setText("ERROR");
+            }else {
+                makeOperation(Double.parseDouble(txtResult.getText().toString()), "");
+            }
+
         } else {
             if (numberIsOperated){
                 txtResult.setText("");
@@ -112,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void makeOperation(int number, String operationSelected) {
+    private void makeOperation(Double number, String operationSelected) {
         txtResult.setText("");
         if (numberOne != 0) {
             numberTwo = number;
@@ -135,28 +155,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (operation.equalsIgnoreCase("multiply")){
             numberOne = numberOne*numberTwo;
         }else if (operation.equalsIgnoreCase("division")){
+            if(numberOne == 0){
+                txtResult.setText("ERROR");
+            }else{
+                Double result = numberOne/numberTwo;
+                numberOne = result;
+                txtResult.setText(result.toString());
+            }
 
-           //  Double result = Double.parseDouble(String.valueOf(numberOne))/ Double.parseDouble(String.valueOf(numberTwo));
-            Double result = (double)numberOne/(double)numberTwo;
-            numberOne = Integer.parseInt(String.valueOf(result));
-            txtResult.setText(result.toString());
         }
         if (!operation.equalsIgnoreCase("division")){
             txtResult.setText(String.valueOf(numberOne));
         }
         numberIsOperated = true;
-        numberTwo =0;
-        if(operation == ""){
-            numberOne = 0;
-            numberTwo = 0;
-        }
+        numberTwo =0.0;
+        operation ="";
+
     }
 
 
     private void resetValues() {
         txtResult.setText("");
-        numberOne = 0;
-        numberTwo = 0;
+        numberOne = 0.0;
+        numberTwo = 0.0;
         operation = "";
     }
 
