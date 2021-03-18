@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnEquals;
     private Button btnClear;
 
-    private int numberOne = 0;
+    private double numberOne = 0; 
     private int numberTwo = 0;
     private String operation = "";
     private Boolean numberIsOperated = false;
@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setView();
-
-
     }
 
     public void setView() {
@@ -135,11 +133,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if (operation.equalsIgnoreCase("multiply")){
             numberOne = numberOne*numberTwo;
         }else if (operation.equalsIgnoreCase("division")){
-
-           //  Double result = Double.parseDouble(String.valueOf(numberOne))/ Double.parseDouble(String.valueOf(numberTwo));
-            Double result = (double)numberOne/(double)numberTwo;
-            numberOne = Integer.parseInt(String.valueOf(result));
-            txtResult.setText(result.toString());
+            //fix result division
+            numberOne = numberOne/numberTwo;
+            if (numberOne % 1 != 0 ){
+                txtResult.setText(String.valueOf(numberOne));
+            } else {
+                int value = (int) numberOne;
+                txtResult.setText(String.valueOf(value));
+            }
         }
         if (!operation.equalsIgnoreCase("division")){
             txtResult.setText(String.valueOf(numberOne));
