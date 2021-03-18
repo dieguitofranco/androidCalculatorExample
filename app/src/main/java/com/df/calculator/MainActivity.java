@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (operation.equalsIgnoreCase("multiply")){
             numberOne = numberOne*numberTwo;
-        }else if (operation.equalsIgnoreCase("division")){
+        }
+        else if (operation.equalsIgnoreCase("division")){
             //fix result division
             numberOne = numberOne/numberTwo;
             if (numberOne % 1 != 0 ){
@@ -142,8 +143,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txtResult.setText(String.valueOf(value));
             }
         }
+
         if (!operation.equalsIgnoreCase("division")){
-            txtResult.setText(String.valueOf(numberOne));
+            int value = (int) numberOne;
+            txtResult.setText(String.valueOf(value));
         }
         numberIsOperated = true;
         numberTwo =0;
