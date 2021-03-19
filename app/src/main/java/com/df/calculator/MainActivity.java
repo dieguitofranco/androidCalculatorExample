@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtResult.setText("");
         if (numberOne != 0) {
             numberTwo = number;
-            resultOperation(operation);
+            resultOperation(operationSelected);
             operation = operationSelected;
         } else {
             operation = operationSelected;
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void resultOperation(String operation){
+    private void resultOperation(String operationSelected){
         if (operation.equalsIgnoreCase("plus")){
             numberOne = numberOne+numberTwo;
         }
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         numberIsOperated = true;
         numberTwo =0;
-        if(operation == ""){
+        if(operationSelected == ""){
             numberOne = 0;
             numberTwo = 0;
         }
